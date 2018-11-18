@@ -1,0 +1,330 @@
+.login{
+    font-family: Avenir,Helvetica,Arial,sans-serif;
+    .container {
+        width: 1000px;
+        min-width: 1000px;
+        min-height: 400px;
+        margin: 0 auto;
+        .container-fluid {
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+        .play_select_insert{
+            background: #f8f8f8;
+            padding: 8px 10px;
+            border-left: 1px solid #f33d3d;
+            border-right: 1px solid #f33d3d;
+            .play_select_tit {
+                li{
+                    display: inline-block;
+                    margin-left: 10px;
+                    padding: 2px 5px;
+                    cursor: pointer;
+                    border-radius: 3px;
+                    &.curr{
+                        background: #ff9726;
+                        color: #fff;
+                    }
+                }
+            }
+
+        }
+        .gameBet{
+            background: #eee;
+            padding: 10px;
+            border-radius: 0 0 5px 5px;
+            border: 1px solid #f33d3d;
+            border-top: none;
+            zoom: 1;
+            .gameBet_balls{
+                width: 645px;
+                border-radius: 5px;
+                background: #fff;
+                float: none;
+                padding-bottom: 20px;
+                .gameBet_left{
+                    width: 100%;
+                    overflow: hidden;
+                    .lmp{
+                        border: 1px solid #ddd;
+                        margin: 20px 22px 10px;
+                        padding: 5px 20px;
+                        border-radius: 5px;
+                        .tie{
+                            height: 30px;
+                            line-height: 30px;
+                            font-size: 16px;
+                            color: #828282;
+                        }
+                        ul.ful{
+                            display: block;
+                            text-align: center;
+                            margin-top: 10px;
+                            .ball_number{
+                                border: 1px solid #ddd;
+                                border-radius: 4px;
+                                float: left;
+                                display: block;
+                                margin-bottom: 10px;
+                                margin-left: 12px;
+                                margin-right: 12px;
+                                width: 110px;
+                                height: 30px;
+                                line-height: 30px;
+                                overflow: hidden;
+                                cursor: pointer;
+                                .spans{
+                                    float: left;
+                                    width: 56px;
+                                    font-size: 14px;
+                                    color: #8f8f8f;
+                                    font-weight: 400;
+                                    background: #eee;
+                                }
+                                .ball_aid{
+                                    float: right;
+                                    width: 53px;
+                                    font-size: 13px;
+                                    background-color: #fff;
+                                    border-left: 1px solid #ddd;
+                                    color: #ababab;
+                                }
+                                &.curr{
+                                    .spans{
+                                        color: #fff;
+                                        background: red;
+                                    }
+                                    .ball_aid{
+                                        color: red;
+                                    }
+
+                                }
+                                
+                            }
+
+                        }
+                    }
+                    .danhao{
+                        padding-left: 10px;
+                        ul{
+                            width: 110px;
+                            float: left;
+                            margin-left: 12px;
+                            margin-bottom: 15px;
+                            li{
+                                &:first-child{
+                                    border-top-left-radius: 5px;
+                                    border-top-right-radius: 5px;
+                                }
+                                &.t {
+                                    height: 30px;
+                                    line-height: 30px;
+                                    border: 1px solid #ddd;
+                                    width: 110px;
+                                    margin-left: 0;
+                                    font-size: 16px;
+                                    color: #828282;
+                                }
+                                &.ball_number{
+                                    border: 1px solid #ddd;
+                                     float: left;
+                                    display: block;
+                                    width: 110px;
+                                    height: 30px;
+                                    line-height: 30px;
+                                    overflow: hidden;
+                                    margin: 0;
+                                    border-radius: 0;
+                                    border-top: none!important;
+                                    cursor: pointer;
+                                    .spans{
+                                        float: left;
+                                        width: 56px;
+                                        font-size: 14px;
+                                        color: #8f8f8f;
+                                        font-weight: 400;
+                                        background: #eee;
+                                    }
+                                    .ball_aid{
+                                        float: right;
+                                        width: 53px;
+                                        font-size: 13px;
+                                        background-color: #fff;
+                                        border-left: 1px solid #ddd;
+                                        color: #ababab;
+                                    }
+                                    &.curr{
+                                        .spans{
+                                            color: #fff;
+                                            background: red;
+                                        }
+                                        .ball_aid{
+                                            color: red;
+                                        }
+
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .addtobetbtn{
+                        background: #d21e1e;
+                        border-radius: 3px;
+                        color: #fff;
+                        display: block;
+                        font-size: 18px;
+                        height: 40px;
+                        line-height: 40px;
+                        margin: 0 auto;
+                        width: 160px;
+                        border: none;
+                    }
+                    .xiad-left{
+                        float: left;
+                        width: 80%;
+                        margin-left: 10%;
+                        height: 200px;
+                        dl{
+                            margin-top: 20px;
+                            display: block;
+                            font-size: 12px;
+                            height: 200px;
+                            width: 100%;
+                            border-radius: 5px;
+                            overflow-y: auto;
+                            border: 1px solid #ccc;
+                            dd{
+                                overflow: hidden;
+                                height: 38px;
+                                line-height: 38px;
+                                border-bottom: 1px dashed #ddd;
+                                padding: 0 5px;
+                                span {
+                                    text-align: left;
+                                    display: block;
+                                    float: left;
+                                    font-size: 12px;
+                                    overflow: hidden;
+                                    text-overflow: ellipsis;
+                                    white-space: nowrap;
+                                    width: 180px;
+                                    cursor: pointer;
+                                }
+                                ul{
+                                    display: block;
+                                    float: left;
+                                    width: 300px;
+                                    text-align: right;
+                                    li{
+                                        display: block;
+                                        float: left;
+                                        input{
+                                                width: 40px;
+                                                padding: 0 4px;
+                                                text-align: center;
+                                                height: 20px;
+                                                line-height: 20px;
+                                                color: #999;
+                                                font-size: 12px;
+                                                border: 1px solid #ddd;
+                                                margin: 0 3px;
+                                                color: black;
+                                                border: 1px solid #ccc;
+                                        }
+                                        &.max_wit{
+                                            margin-left: 20px;
+                                            max-width: 160px;
+                                            white-space: nowrap;
+                                            text-overflow: ellipsis;
+                                            overflow: hidden;
+                                            .mark{
+                                                color: #d62d2d;
+                                            }
+                                        }
+                                        &.sc{
+                                            float: right;
+                                            padding-right: 5px;
+                                            a{
+                                                color: #ff0000;
+                                                font-weight: 800;
+                                                font-size: 16px;
+                                                cursor: pointer;
+                                                text-decoration: none;
+                                            }
+                                        }
+                                    }
+                                }
+
+                            }
+                        }
+                    }
+                    .myzhuihao{
+                        text-align: left;
+                        min-height: 50px;
+                        float: left;
+                        width: 100%;
+                        margin-top: 20px;
+                        border-radius: 5px;
+                        .numberchoose {
+                            height: 50px;
+                            line-height: 50px;
+                            width: 699px;
+                            position: relative;
+                            margin-left: 65px;
+                        }
+
+                    }
+                    .xiad-righ, .xiad-righ .li21 {
+                        height: 40px;
+                        text-align: center;
+                    }
+                    .xiad-righ {
+                        float: left;
+                        width: 100%;
+                        margin-top: 20px;
+                        // .li22 {
+                        //     width: 140px;
+                        //     height: 40px;
+                        //     line-height: 40px;
+                        //     margin-left: 13px;
+                        //     display: inline-block;
+                        //     background: #f33d3d;
+                        //     color: #fff;
+                        //     border-radius: 5px;
+                        //     cursor: pointer;
+                        //     text-align: center;
+                        // }
+                        .redmore{
+                            background: #f33d3d!important;
+                            color:#fff!important;
+                        }
+
+                    }
+                }
+
+            }
+        }
+
+
+
+
+    }
+    .pb-10 {
+        padding-bottom: 10px;
+    }
+    .pt-10 {
+        padding-top: 10px;
+    }
+    .clearfix{
+        zoom: 1;
+    }
+    .dis-inb{
+        display: inline-block;
+    }
+    .clearboth{
+        clear: both;
+    }
+
+}
