@@ -4,17 +4,17 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 let routers = [
-    
+
     {
         path: '/',
-        name: 'login',
-        component: resolve => require(['pages/auth/login/Login'], resolve),
-        redirect: '/login'
+        name: 'luckdraw',
+       component: resolve => require(['pages/luck/luckdraw'], resolve),
+        redirect: '/luckdraw'
     },
     {
         path: '/login',
         component: resolve => require(['pages/auth/login/Login'], resolve),
-        
+
         children: [
             {
                 path: 'register',
@@ -24,6 +24,11 @@ let routers = [
             },
         ]
     },
+    {
+        path: '/luckdraw',
+        name: 'luckdraw',
+        component: resolve => require(['pages/luck/luckdraw'], resolve),
+    }
     // {
     //     path: '/lock/:num',
     //     name: 'lock',
