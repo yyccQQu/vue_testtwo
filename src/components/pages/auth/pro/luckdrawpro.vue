@@ -1,27 +1,23 @@
+
 <style lang="less" scoped>
 body {
   width: 100%;
-  font-size: 28px;
   .container {
     position: relative;
     .bg {
       width: 100%;
       float: left;
     }
-    .info,
-    .infos {
+    .info {
       float: left;
       font-size: 0.15rem;
       color: #0275b8;
-      margin-top: -42%;
+      margin-top: -35%;
       width: 100%;
       text-align: center;
       span {
         color: #ff4462;
       }
-    }
-    .infos {
-      margin-top: -38%;
     }
     .wheelImg {
       float: left;
@@ -144,7 +140,6 @@ body {
   position: relative;
   overflow: hidden;
   margin-top: -115%;
-  height: 7rem;
   float: left;
 }
 .wheelBack {
@@ -159,62 +154,9 @@ body {
   width: 0.65rem;
   height: 0.75rem;
   left: 50%;
-  top: 26%;
+  top: 50%;
   margin-top: -0.375rem;
   margin-left: -0.325rem;
-}
-.persons {
-  font-size: 22px;
-  height: 50px;
-  border: 1px solid red;
-  background: red;
-  width: 50px;
-  border-radius: 50%;
-  line-height: 50px;
-  position: absolute;
-}
-.per-1,
-.neidiv-1 {
-  top: 198px;
-  left: 56px;
-}
-.per-2,
-.neidiv-2 {
-  top: 252px;
-  left: 126px;
-}
-.per-3,
-.neidiv-3 {
-  top: 257px;
-  left: 231px;
-}
-.per-4,
-.neidiv-4 {
-  top: 199px;
-  left: 306px;
-}
-.neidiv-1,
-.neidiv-2,
-.neidiv-3,
-.neidiv-4 {
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
-  background: #faf;
-  z-index: 10000;
-  position: absolute;
-  transition: top 0.5s ease-in 0.1s, left 0.5s linear 0.1s;
-  -webkit-transition: top 0.5s ease-in 0.1s, left 0.5s linear 0.1s;
-  -moz-transition: top 0.5s ease-in 0.1s, left 0.5s linear 0.1s;
-}
-.alldiv {
-  border: 1px solid red;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 100;
 }
 </style>
 
@@ -223,46 +165,28 @@ body {
   <div class="container">
     <img class="bg" src="../../../assets/img/wheelBg01.png" alt="">
     <div class="info">抽奖次数：<span>{{remainDayCount}}</span></div>
-    <div class="infos">距离开奖还有：<span>{{countSecound}}</span>秒</div>
     <img class="bg" src="../../../assets/img/wheelBg02.png" alt="">
     <div class="luckyWheel">
       <div class="wheelBack" :style="{transform:rotateDeg, transition: transitionStyle}">
         <img class="wheelImg" src="../../../assets/img/luckywheel.png" alt="">
         <ul class="turntable-rotate">
-            <!-- 2，再次点击这里获取要投掷方位 -->
-          <li v-for="(item, index) in prizes" :key="index" :class="'awards-'+ (index + 1)" @click="addthe(index)">
-            <div class="prizeName">{{item.prizeName}}++{{item.hasOwner}}</div>
+          <li v-for="(item, index) in prizes" :key="index" :class="'awards-'+ (index + 1)">
+            <div class="prizeName">{{item.prizeName}}</div>
             <div class="prizeImage"><img :src="item.prizeImage" :class="item.isActive ? 'big' : ''"></div>
           </li>
         </ul>
       </div>
       <img class="guide" @click="handleClick" src="../../../assets/img/guide.png" alt="">
-      <!--1， 点击div 获取index -->
-      <div class="persons" v-for="(item,index) in names" :key="item" :class="'per-'+ (index + 1)" @click="hasInner(index)">
-          <p>{{item}}</p>
-      </div>
-      <div v-for="(item,index) in names" :class="'per-'+(index+1)" :key="index" class="neidiv-1"></div>
-      
     </div>
   </div>
   <div class="resultModel" v-if="isModel">
     <div class="resultbg"></div>
-    <div class="lucky" v-show="thindex==1">
+    <div class="lucky">
       <img class="luckyImg" src="../../../assets/img/luckyResult.png" alt="">
       <div class="text" v-if="prizeType === 1">抽中<span>{{money}}</span>元现金奖励</div>
       <div class="text" v-if="prizeType === 2">抽中<span>{{score}}</span>个青豆奖励</div>
       <div class="btn" @click="closeModel"></div>
     </div>
-    <div class="lucky" v-show="thindex==2">
-        <img class="luckyImg" src="../../../assets/img/luckyResult.png" alt="" style="visibility:hidden;">
-        <div class="text" @click="closeModel">请充值再投</div>
-    </div>
-  </div>
-  <div class="alldiv" @click="closeModel" v-show="thindex==3">
-      <div class="nac" ></div>
-
-
-      
   </div>
 </div>
 </template>
@@ -271,7 +195,6 @@ body {
 export default {
   data() {
     return {
-      names: ["赵钱", "孙李", "周吴", "郑王"],
       isModel: false, //中奖弹窗
       remainDayCount: 8, //剩余抽奖次数
 
@@ -284,183 +207,46 @@ export default {
       degIndex: 0, //奖品的下标
       index: "", //做奖励ID映射
       interPackage: {},
-      thindex: 0,
       prizes: [
         {
           prizeName: "奖品1",
-          prizeImage: "",
-          hasOwner: 0
+          prizeImage: ""
         },
         {
           prizeName: "奖品2",
-          prizeImage: "",
-          hasOwner: 0
+          prizeImage: ""
         },
         {
           prizeName: "奖品3",
-          prizeImage: "",
-          hasOwner: 0
+          prizeImage: ""
         },
         {
           prizeName: "奖品4",
-          prizeImage: "",
-          hasOwner: 0
+          prizeImage: ""
         },
         {
           prizeName: "奖品5",
-          prizeImage: "",
-          hasOwner: 0
+          prizeImage: ""
         },
         {
           prizeName: "奖品6",
-          prizeImage: "",
-          hasOwner: 0
+          prizeImage: ""
         },
         {
           prizeName: "奖品7",
-          prizeImage: "",
-          hasOwner: 0
+          prizeImage: ""
         },
         {
           prizeName: "奖品8",
-          prizeImage: "",
-          hasOwner: 0
+          prizeImage: ""
         }
       ], //奖品数组
-      //坐标数组
-      positions: [
-        {
-          top: "74px",
-          left: "172px"
-        },
-        {
-          top: "74px",
-          left: "216px"
-        },
-        {
-          top: "111px",
-          left: "246px"
-        },
-        {
-          top: "148px",
-          left: "247px"
-        },
-        {
-          top: "184px",
-          left: "215px"
-        },
-        {
-          top: "184px",
-          left: "172px"
-        },
-        {
-          top: "151px",
-          left: "143px"
-        },
-        {
-          top: "106px",
-          left: "143px"
-        }
-      ],
-      initPos: [
-        {
-          top: "198px",
-          left: "56px"
-        },
-        {
-          top: "252px",
-          left: "126px"
-        },
-        {
-          top: "257px",
-          left: "231px"
-        },
-        {
-          top: "199px",
-          left: "306px"
-        }
-      ],
       prizeType: "", //中奖类型 1:现金 2:青豆
       money: "0.00", //中奖金额
-      score: 0, //中奖青豆\
-      divIndex: 0,
-      forDivIndex: 0,
-      countSecound: 3
+      score: 0 //中奖青豆
     };
   },
-
   methods: {
-    reTime() {
-      let _this = this;
-      let setInId = setInterval(() => {
-        this.countSecound--;
-        if (this.countSecound == 0) {
-          this.doSomeThing();
-        }
-        if (this.countSecound < 0) {
-          clearInterval(setInId);
-          this.countSecound = 3;
-          if (this.countSecound == 3) {
-            this.reTime();
-          }
-        }
-      }, 1000);
-    },
-    doSomeThing() {
-      this.thindex = 3;
-      this.isModel = true;
-    },
-    hasPos() {
-      this.reTime();
-      let initP = this.initPos[this.divIndex];
-      $(".neidiv-1")
-        .eq(this.divIndex)
-        .css({
-          top: initP.top,
-          left: initP.left
-        });
-      setTimeout(() => {
-        $(".neidiv-1")
-          .eq(this.divIndex)
-          .css({ display: "block" });
-      }, 1000);
-    },
-    addthe(index) {
-      let vIndex = index + 1;
-      if (vIndex == 8) {
-        vIndex = 0;
-      }
-      //   console.log(vIndex, "vIndex");
-      let position = this.positions[vIndex];
-      if (this.remainDayCount <= 0) {
-        this.remainDayCount = 0;
-        this.thindex = 2;
-        this.isModel = true;
-        return;
-      }
-      $(".neidiv-1")
-        .eq(this.divIndex)
-        .css({
-          top: position.top,
-          left: position.left
-        });
-      this.prizes[index].hasOwner++;
-
-      this.remainDayCount--;
-
-      let _this = this;
-      setTimeout(() => {
-        $(".neidiv-1")
-          .eq(this.divIndex)
-          .css({ display: "none" });
-        _this.hasPos();
-      }, 600);
-      //   console.log(index, "index");
-    },
-    hasInner(index) {
-      this.divIndex = index;
-      console.log(index, "index");
-    },
     initData() {
       this.rotateDeg = "rotate(0deg)";
       this.transitionStyle = "transform 0s ease-out";
@@ -484,12 +270,10 @@ export default {
     },
     handleClick() {
       this.transitionStyle = "transform 3s ease-out";
-      let mathrandom = this.extraDeg[5];
-      this.rotateDeg = "rotate(" + (360 * 8 + mathrandom) + "deg)";
+      let mathrandom = this.extraDeg[1];
+      this.rotateDeg = "rotate(" + (360 * 8 + parseInt(mathrandom)) + "deg)";
       setTimeout(() => {
-        this.thindex = 1;
         this.isModel = true;
-        this.remainDayCount += 8;
       }, 3500);
     },
     // 关闭弹窗
@@ -500,7 +284,6 @@ export default {
   },
   mounted() {
     this.initData();
-    this.reTime();
   },
   created() {}
 };
