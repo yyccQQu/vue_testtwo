@@ -1,4 +1,4 @@
-<style lang="less" scoped>
+﻿<style lang="less" scoped>
 body {
   width: 100%;
   font-size: 28px;
@@ -359,6 +359,7 @@ body {
 <template>
 <div>
   <div class="container">
+    <progresser></progresser>
     <div class="hideball1 hideball"  ref='hideball1'></div>
     <div class="hideball2 hideball"  ref='hideball2'></div>
     <div class="hideball3 hideball"  ref='hideball3'></div>
@@ -441,10 +442,12 @@ body {
 
 <script>
 import prizeBox from "./prizeBox.vue";
+import progresser from "./progress.vue";
 
 export default {
   components: {
-    prizeBox
+    prizeBox,
+    progresser
   },
   data() {
     return {
