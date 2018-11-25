@@ -4,6 +4,47 @@ body {
   font-size: 28px;
   .container {
     position: relative;
+    .hideball {
+      position: absolute;
+      top: 0;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background-color: rgb(0, 160, 220);
+      z-index: -1;
+    }
+    .hideball1 {
+      top: 275px;
+      left: 219px;
+    }
+    .hideball2 {
+      top: 303px;
+      left: 268px;
+    }
+    .hideball3 {
+      top: 360px;
+      left: 270px;
+    }
+    .hideball4 {
+      top: 404px;
+      left: 231px;
+    }
+    .hideball5 {
+      top: 405px;
+      left: 181px;
+    }
+    .hideball6 {
+      top: 370px;
+      left: 140px;
+    }
+    .hideball7 {
+      top: 308px;
+      left: 135px;
+    }
+    .hideball8 {
+      top: 275px;
+      left: 170px;
+    }
     .bg {
       width: 100%;
       float: left;
@@ -300,11 +341,32 @@ body {
     opacity: 0;
   }
 }
+@keyframes flash {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+.red {
+  color: #d00;
+  background-image: linear-gradient(135deg, #fdd819 10%, #e80505 100%);
+}
 </style>
 
 <template>
 <div>
   <div class="container">
+    <div class="hideball1 hideball"  ref='hideball1'></div>
+    <div class="hideball2 hideball"  ref='hideball2'></div>
+    <div class="hideball3 hideball"  ref='hideball3'></div>
+    <div class="hideball4 hideball"  ref='hideball4'></div>
+    <div class="hideball5 hideball"  ref='hideball5'></div>
+    <div class="hideball6 hideball"  ref='hideball6'></div>
+    <div class="hideball7 hideball"  ref='hideball7'></div>
+    <div class="hideball8 hideball"  ref='hideball8'></div>
     <img class="bg" src="../../../assets/img/wheelBg01.png" alt="">
     <div class="info">抽奖次数：<span>{{remainDayCount}}</span></div>
     <div class="infos">距离开奖还有：<span>{{countSecound}}</span>秒</div>
@@ -314,12 +376,13 @@ body {
         <img class="wheelImg" src="../../../assets/img/luckywheel.png" alt="">
         <ul class="turntable-rotate">
             <!-- 2，再次点击这里获取要投掷方位 -->
-          <li :ref="'awards'+ (index + 1)" v-for="(item, index) in prizes" :key="index" :class="'awards-'+ (index + 1)" @click="addthe(index)">
+          <li :ref="'awards-'+ (index + 1)" v-for="(item, index) in prizes" :key="index" :class="'awards-'+ (index + 1)" @click="showposdiv($event);addthe(index)">
             <div class="prizeName">{{item.prizeName}}++{{item.hasOwner}}</div>
             <div class="prizeImage"><img :src="item.prizeImage" :class="item.isActive ? 'big' : ''"></div>
           </li>
         </ul>
       </div>
+        
       <img ref="guide" class="guide" @click="handleClick" src="../../../assets/img/guide.png" alt="">
       <!--1， 点击div 获取index -->
       <div class="persons" v-for="(item,index) in names" :key="item" :class="'per-'+ (index + 1)" @click="hasInner(index)">
@@ -327,13 +390,15 @@ body {
       </div>
       <div class="persons Boz" @click="addBond">
           <p>Boz</p>
-          <div v-for="(ball,index) in balls" :class="{show: !ball.run}" class="inner" ref="ball"      :key="index">
+          <div v-for="(ball,index) in balls" :class="{show: !ball.run}" class="inner" ref="ball"
+              :key="index">
           </div>
       </div>
       <div v-for="(item,index) in names" :class="'per-'+(index+1)" :key="index" class="neidiv-1"></div>
       
     </div>
   </div>
+  
   <div class="resultModel" v-if="isModel">
     <div class="resultbg"></div>
     <div class="lucky" v-show="thindex==1">
@@ -509,7 +574,7 @@ export default {
       score: 0, //中奖
       divIndex: 0,
       forDivIndex: 0,
-      countSecound: 300
+      countSecound: 3
     };
   },
   computed: {
@@ -568,7 +633,12 @@ export default {
         this.thindex = 3;
         this.showAnimate();
       }, 2000);
-      setTimeout(() => {}, 1000);
+      setTimeout(() => {
+        this.thindex = 0;
+        this.isModel = false;
+        this.shake($(".awards-3"), "red", 3);
+        this.shake($(".awards-7"), "red", 3);
+      }, 3000);
     },
     hasPos() {
       let initP = this.initPos[this.divIndex];
@@ -651,6 +721,27 @@ export default {
         this.remainDayCount += 8;
       }, 3500);
     },
+    //闪动效果----------------
+    shake(element, className, times) {
+      var i = 0,
+        t = false,
+        o = element.attr("class"),
+        c = "",
+        times = times || 2;
+
+      if (t) return;
+
+      t = setInterval(function() {
+        i++;
+        c = i % 2 ? o + " " + className : o;
+        element.attr("class", c);
+
+        if (i == 2 * times) {
+          clearInterval(t);
+          element.removeClass(className);
+        }
+      }, 200);
+    },
     //小球运动-----------------------------------------------------------
     parabola(element, options, arc, duration) {
       duration = duration || 800;
@@ -701,20 +792,33 @@ export default {
       element.style.left = _left + "px";
       element.style.top = _top + "px";
     },
+    showposdiv(e) {
+      var rect = e.target.getBoundingClientRect();
+      var left = rect.left;
+      var top = rect.top;
+      console.log(left, top, "lefttop");
+    },
     addBond() {
       if (this.countball == 8) {
         this.countball = 0;
       }
       this.countball++;
       let dom = "awards" + this.countball;
-      console.log(dom, "dom", this.$refs[dom]);
+      // console.log(dom, "dom", this.$refs[dom], document.body.offsetTop);
       let domtrue = $("." + dom);
-      console.log(domtrue.offset.top, "domtrue");
-      return;
+      // console.log($(".awards1").getBoundingClientRect().left, "domtrue");
+      // return;
+
       let idx = this.ballIndex;
       console.log(idx);
       this.balls[idx].run = true;
-      this.parabola(this.$refs.ball[idx], this.offset(domtrue), 0.001, 800);
+      let refdom = "hideball" + (idx + 1);
+      this.parabola(
+        this.$refs.ball[idx],
+        this.offset(this.$refs[refdom]),
+        0.001,
+        800
+      );
       setTimeout(() => {
         this.balls[idx].run = false;
         this.$refs.ball[idx].style.top = "";
