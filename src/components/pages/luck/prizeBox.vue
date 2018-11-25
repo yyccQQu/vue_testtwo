@@ -111,7 +111,7 @@ h2 {
   transform-origin: 100px 100px -100px;
   animation-iteration-count: 1;
   &:first-child {
-    margin-left: -22px;
+    margin-left: -33px;
   }
 }
 
@@ -162,6 +162,9 @@ h2 {
   100% {
     transform: rotateY(1080deg);
   }
+}
+.hasShowPrize {
+  display: flex;
 }
 </style>
 
